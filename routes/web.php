@@ -7,8 +7,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/welcome',function(){
-//     echo "Welcome Tejassvi Arun";
+Route::get('/welcome',function(){
+    echo "Welcome Tejassvi Arun";
 
-// });
+});
 Route::resource('posts', PostController::class);
