@@ -17,8 +17,8 @@ class PostController extends Controller
      public function index()
     {
         $posts = $this->postservice->getData();
-        //return  response()->json($posts,200);
-        return view('posts.index',compact('posts'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return  response()->json($posts,200);
+        //return view('posts.index',compact('posts'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+       // return view('posts.create');
     }
 
     /**
@@ -40,13 +40,13 @@ class PostController extends Controller
             'comment' => 'required|regex:/[a-zA-Z0-9\s]+/',
         ]);
         $result = $this->postservice->savePost($validationData);
-       //return  response()->json($result,200);
-        if($result['success']){
-            return redirect()->route('posts.index')->with('message', $result['data'])->with('class','alert alert-success');
+        return  response()->json($result,200);
+        // if($result['success']){
+        //     return redirect()->route('posts.index')->with('message', $result['data'])->with('class','alert alert-success');
             
-        }else{
-            return redirect()->back()->withInput()->with('message',$result['data'])->with('class','alert alert-danger');
-        }
+        // }else{
+        //     return redirect()->back()->withInput()->with('message',$result['data'])->with('class','alert alert-danger');
+        // }
     }
 
     /**
@@ -88,6 +88,6 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         $data = $this->postservice->deleteComment($id);  
-        return redirect()->route('posts.index')->with('success','Product deleted successfully');
+       // return redirect()->route('posts.index')->with('success','Product deleted successfully');
     }
 }
